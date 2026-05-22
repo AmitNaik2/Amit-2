@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
+import Image from "next/image";
 import { type GameDeal } from "../types";
 import { BadgeCheck, ArrowLeft, ExternalLink, Gamepad2, Users, Star } from "lucide-react";
 import { generateUniqueSummary, generateTags } from "../lib/text-utils";
@@ -55,9 +56,9 @@ export function GameDetail({ deals, isLoading }: { deals: GameDeal[], isLoading?
       </button>
 
       <div className="grid md:grid-cols-2 gap-8 lg:gap-12 bg-black/40 border border-white/10 rounded-3xl p-6 lg:p-8 backdrop-blur-xl">
-        <div className="rounded-2xl overflow-hidden relative border border-white/10 shadow-[0_0_40px_rgba(124,58,237,0.15)] group">
-          <img src={deal.image || deal.thumbnail} alt={deal.title} className="w-full object-cover aspect-video group-hover:scale-105 transition-transform duration-700" />
-          <div className="absolute top-4 right-4 bg-green-500 text-black px-3 py-1 rounded text-xs font-bold uppercase tracking-widest flex items-center gap-1 shadow-lg">
+        <div className="rounded-2xl overflow-hidden relative border border-white/10 shadow-[0_0_40px_rgba(124,58,237,0.15)] group aspect-video">
+          <Image src={deal.image || deal.thumbnail} alt={deal.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="w-full object-cover group-hover:scale-105 transition-transform duration-700" />
+          <div className="absolute top-4 right-4 bg-green-500 text-black px-3 py-1 rounded text-xs font-bold uppercase tracking-widest flex items-center gap-1 shadow-lg z-10">
             <BadgeCheck className="w-3 h-3" /> Verified Free
           </div>
         </div>

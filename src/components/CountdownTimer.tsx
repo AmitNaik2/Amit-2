@@ -35,9 +35,8 @@ export function CountdownTimer({ expiryDate }: { expiryDate: string }) {
     return () => clearInterval(id);
   }, [expiryDate, isMounted]);
 
-  if (!isMounted) {
-    return <span className="text-red-500 font-semibold">Loading...</span>;
-  }
+  // Return nothing until client-side mount — prevents hydration mismatch & "Loading..." flash
+  if (!isMounted) return null;
 
   return <span className="text-red-500 font-semibold">{timeLeft}</span>;
 }
