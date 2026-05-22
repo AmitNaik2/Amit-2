@@ -1,3 +1,4 @@
+"use client";
 // C:/Users/Amit/antigravity/gamesdealshub-next/src/components/DealStats.tsx
 'use client';
 import { useEffect, useState } from 'react';
@@ -30,3 +31,4 @@ export function DealStats({ totalDeals }: { totalDeals: number }) {
     </div>
   );
 }
+

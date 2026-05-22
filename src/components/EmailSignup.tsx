@@ -1,3 +1,4 @@
+"use client";
 // C:/Users/Amit/antigravity/gamesdealshub-next/src/components/EmailSignup.tsx
 'use client';
 import { useState } from 'react';
@@ -64,3 +65,4 @@ export function EmailSignup() {
     </div>
   );
 }
+

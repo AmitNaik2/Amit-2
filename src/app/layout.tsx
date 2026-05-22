@@ -1,19 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-// Fixes 2, 3, 4, 5, 6: Global Metadata with Open Graph and Twitter Cards
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.gamesdealshub.me"),
   title: "GamesDealsHub | Free PC Games & Deals — Updated Daily",
@@ -42,7 +30,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Fix 9: Sitewide WebSite schema with SearchAction
   const websiteJsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -59,15 +46,17 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html lang="en" className="h-full antialiased dark">
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
       </head>
-      <body className="min-h-full flex flex-col bg-gray-50 text-gray-900">
-        {/* Fix 10: GTM loaded after page is interactive */}
+      <body className="min-h-full flex flex-col bg-[#050505] text-white">
         <Script id="google-tag-manager" strategy="afterInteractive">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -87,34 +76,7 @@ export default function RootLayout({
           ></iframe>
         </noscript>
 
-        <header className="bg-white border-b sticky top-0 z-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <h1 className="text-xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-              GamesDealsHub
-            </h1>
-            <nav className="flex gap-4">
-              <a href="/" className="text-sm font-medium hover:text-purple-600 transition-colors">Deals</a>
-              <a href="/archive" className="text-sm font-medium hover:text-purple-600 transition-colors">Archive</a>
-              <a href="/about" className="text-sm font-medium hover:text-purple-600 transition-colors">About</a>
-            </nav>
-          </div>
-        </header>
-
-        <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
-          {children}
-        </main>
-
-        <footer className="bg-gray-900 text-gray-400 py-8 text-center mt-auto">
-          <div className="max-w-7xl mx-auto px-4 flex flex-col items-center gap-4">
-            <div className="flex gap-4 text-sm">
-              <a href="/about" className="hover:text-white">About Us</a>
-              <a href="/contact" className="hover:text-white">Contact</a>
-              <a href="/privacy" className="hover:text-white">Privacy Policy</a>
-              <a href="/terms" className="hover:text-white">Terms of Service</a>
-            </div>
-            <p className="text-xs">&copy; {new Date().getFullYear()} GamesDealsHub. All rights reserved.</p>
-          </div>
-        </footer>
+        {children}
       </body>
     </html>
   );

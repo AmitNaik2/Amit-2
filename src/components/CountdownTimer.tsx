@@ -1,26 +1,27 @@
-// C:/Users/Amit/antigravity/gamesdealshub-next/src/components/CountdownTimer.tsx
-'use client';
-import { useState, useEffect } from 'react';
+"use client";
+import React, { useState, useEffect } from 'react';
 
-// Fix 11: Client component for live expiry countdown with urgency styling
 export function CountdownTimer({ expiryDate }: { expiryDate: string }) {
   const [timeLeft, setTimeLeft] = useState('');
-  const [urgent, setUrgent] = useState(false);
-  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    setIsClient(true);
     const tick = () => {
       const diff = new Date(expiryDate).getTime() - Date.now();
       if (diff <= 0) { 
         setTimeLeft('Expired'); 
-        setUrgent(true);
         return; 
       }
-      const h = Math.floor(diff / 3600000);
-      const m = Math.floor((diff % 3600000) / 60000);
-      setUrgent(h < 6);
-      setTimeLeft(h >= 24 ? `${Math.floor(h/24)}d ${h%24}h left` : `${h}h ${m}m left`);
+      
+      const parts = [];
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const m = Math.floor((diff / (1000 * 60)) % 60);
+
+      if (d > 0) parts.push(`${d}d`);
+      if (h > 0) parts.push(`${h}h`);
+      if (m > 0 || parts.length > 0) parts.push(`${m}m`);
+
+      setTimeLeft(`Expires in ${parts.join(' ')}`);
     };
     
     tick();
@@ -28,13 +29,6 @@ export function CountdownTimer({ expiryDate }: { expiryDate: string }) {
     return () => clearInterval(id);
   }, [expiryDate]);
 
-  if (!isClient) return <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-gray-100 text-gray-500">Loading...</span>;
-
-  return (
-    <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
-      urgent ? 'bg-red-100 text-red-600 animate-pulse' : 'bg-orange-100 text-orange-600'
-    }`}>
-      ⏱ {timeLeft}
-    </span>
-  );
+  return <span className="text-red-500 font-semibold">{timeLeft}</span>;
 }
+

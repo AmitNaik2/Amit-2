@@ -1,3 +1,4 @@
+"use client";
 // C:/Users/Amit/antigravity/gamesdealshub-next/src/components/DealGrid.tsx
 'use client';
 
@@ -74,3 +75,4 @@ export function DealGrid({ initialDeals }: { initialDeals: Deal[] }) {
     </div>
   );
 }
+

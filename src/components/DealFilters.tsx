@@ -1,3 +1,4 @@
+"use client";
 // C:/Users/Amit/antigravity/gamesdealshub-next/src/components/DealFilters.tsx
 'use client';
 
@@ -51,3 +52,4 @@ export function DealFilters({
     </div>
   );
 }
+
