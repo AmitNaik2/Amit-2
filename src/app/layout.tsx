@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://gamedeals-next.vercel.app";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.gamesdealshub.me"),
+  metadataBase: new URL(siteUrl),
   title: "GamesDealsHub | Free PC Games & Deals — Updated Daily",
   description: "Track and claim free PC games before they expire. Updated daily with the latest Epic Games, Steam, and GOG freebies.",
   alternates: {
@@ -12,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "GamesDealsHub | Free PC Games & Deals",
     description: "Track and claim free PC games before they expire.",
-    url: "https://www.gamesdealshub.me/",
+    url: `${siteUrl}/`,
     siteName: "GamesDealsHub",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "GamesDealsHub" }],
     type: "website",
@@ -34,12 +36,12 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "GamesDealsHub",
-    url: "https://www.gamesdealshub.me",
+    url: siteUrl,
     potentialAction: {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: "https://www.gamesdealshub.me/?q={search_term_string}",
+        urlTemplate: `${siteUrl}/?q={search_term_string}`,
       },
       "query-input": "required name=search_term_string",
     },

@@ -1,7 +1,8 @@
-﻿"use client";
+"use client";
 import { motion } from "motion/react";
 import { type MouseEvent } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { type GameDeal } from "../types";
 import { Countdown } from "./Countdown";
 import { ExternalLink, BadgeCheck } from "lucide-react";
@@ -25,19 +26,20 @@ export function FeaturedDeal({ deal }: { deal: GameDeal }) {
       className="relative group overflow-hidden rounded-3xl h-[400px] sm:h-[450px] border border-white/10 mb-12 shadow-[0_0_40px_rgba(139,92,246,0.15)] bg-[#050816]"
     >
       <div className="absolute inset-0 z-0">
-        <img 
+        <Image 
           src={bgImage} 
           alt={deal.title} 
+          fill
+          sizes="100vw"
           className="w-full h-full object-cover opacity-50 group-hover:scale-110 group-hover:opacity-70 transition-all duration-1000 ease-out" 
-          loading="eager"
-          fetchPriority="high"
+          priority
         />
       </div>
       <div className="absolute inset-0 bg-gradient-to-t from-[#050816] via-[#050816]/60 to-transparent z-10"></div>
       
       <div className="absolute top-6 left-6 z-20 px-4 py-2 bg-gradient-to-r from-[#8B5CF6] to-[#06B6D4] text-white text-[10px] font-orbitron font-bold uppercase tracking-widest rounded-xl shadow-[0_0_20px_rgba(139,92,246,0.4)] flex items-center gap-2">
         Featured Drop
-        {gameInfo?.rating && <span className="ml-2 pl-2 border-l border-white/30 text-white flex items-center gap-1">â˜… {Math.round(gameInfo.rating)}</span>}
+        {gameInfo?.rating && <span className="ml-2 pl-2 border-l border-white/30 text-white flex items-center gap-1">★ {Math.round(gameInfo.rating)}</span>}
       </div>
 
       <div className="absolute bottom-8 left-6 sm:left-10 z-20 max-w-full sm:max-w-[75%] pr-6 font-poppins">
@@ -73,6 +75,3 @@ export function FeaturedDeal({ deal }: { deal: GameDeal }) {
     </motion.div>
   );
 }
-
-
-

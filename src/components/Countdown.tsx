@@ -9,8 +9,14 @@ interface CountdownProps {
 export function Countdown({ endDate }: CountdownProps) {
   const [timeLeft, setTimeLeft] = useState<string>('');
   const [isEndingSoon, setIsEndingSoon] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isMounted) return;
     if (!endDate || endDate === 'N/A') return;
 
     // Fix Gamerpower API date string specifically
@@ -53,7 +59,18 @@ export function Countdown({ endDate }: CountdownProps) {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [endDate]);
+  }, [endDate, isMounted]);
+
+  if (!isMounted) {
+    return (
+      <div className="flex flex-col gap-0.5 text-cyan-400">
+        <span className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest font-bold">
+          <Clock className="w-3 h-3" />
+          Loading...
+        </span>
+      </div>
+    );
+  }
 
   if (!endDate || endDate === 'N/A' || !timeLeft) return null;
 
@@ -71,4 +88,3 @@ export function Countdown({ endDate }: CountdownProps) {
     </div>
   );
 }
-

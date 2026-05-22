@@ -1,8 +1,9 @@
-﻿"use client";
+"use client";
 import { motion } from "motion/react";
 import { Monitor, MonitorSmartphone, Smartphone, Gamepad2, Share2, BadgeCheck, ShieldCheck, Star, ShieldAlert, Activity } from "lucide-react";
 import { type Key, useRef, type MouseEvent } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { type GameDeal } from "../types";
 import { cn } from "../lib/utils";
 import { getDealRarity } from "../lib/deal-utils";
@@ -84,15 +85,13 @@ export function DealCard({ deal, index = 0, onShare = () => {}, onRemind, priori
       {/* Image Section */}
       <div className="relative w-full aspect-video sm:aspect-[16/9] shrink-0 overflow-hidden bg-black border-b border-white/5">
         <Link href={gameUrl} className="block w-full h-full">
-          <img
+          <Image
             src={bgImage}
             alt={`Free download of ${deal.title} on ${deal.platforms}`}
-            width={600}
-            height={337}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
             className="block object-cover w-full h-full transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100"
-            loading={priority ? "eager" : "lazy"}
-            fetchPriority={priority ? "high" : "auto"}
-            decoding={priority ? "sync" : "async"}
+            priority={priority}
           />
           <div className="absolute inset-0 transition-opacity duration-500 bg-gradient-to-t from-[#050816] via-[#050816]/40 to-transparent opacity-80 group-hover:opacity-60"></div>
           
