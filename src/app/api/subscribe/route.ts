@@ -1,5 +1,5 @@
 // C:/Users/Amit/antigravity/gamesdealshub-next/src/app/api/subscribe/route.ts
-import { NextResponse } from 'next';
+import { NextResponse } from 'next/server';
 
 // Fix 15: API route to handle email subscriptions via Brevo
 export async function POST(request: Request) {

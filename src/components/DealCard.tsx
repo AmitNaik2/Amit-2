@@ -12,7 +12,7 @@ export function DealCard({ deal, priority = false }: { deal: Deal, priority?: bo
     if (platformStr.includes('steam')) return 'Get free on Steam';
     if (platformStr.includes('gog')) return 'Grab free on GOG';
     if (platformStr.includes('prime')) return 'Claim on Prime Gaming';
-    return \`Claim on \${platforms}\`;
+    return `Claim on ${platforms}`;
   };
 
   return (
